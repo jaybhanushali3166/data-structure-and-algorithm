@@ -175,7 +175,63 @@ class LinkedList {
         first.next = first.next.next;
     }
 
+    // Function to find merge node f two Linked list
+    findMergeNode(a, b) {
+        let arr = [];
+
+        while (a || b) {
+            if (a && arr.find(n => n === a)) return a.data;
+            else if (a) {
+                arr.push(a)
+                a = a.next;
+            }
+            if (b && arr.find(n => n === b)) return b.data;
+            else if (b) {
+                arr.push(b);
+                b = b.next;
+            }
+        }
+
+        return 0;
+    }
 
 
 }
+
+// A class for Node which is basic building block in DLL 
+const DoublyLinkedListNode = class {
+    constructor(nodeData) {
+        this.data = nodeData;
+        this.next = null;
+        this.prev = null;
+    }
+
+    // reversing a Doubly Linked List
+    reverse(llist) {
+        // Write your code here
+        if (llist == null || llist.next == null) {
+            return llist
+        }
+        let temp = null;
+        let current = llist;
+
+        /*
+         * swap next and prev for all nodes of doubly linked list
+         */
+        while (current != null) {
+            temp = current.prev;
+            current.prev = current.next;
+            current.next = temp;
+            current = current.prev;
+        }
+        /*
+        * Before changing head, check for the cases like empty list and list with only
+        * one node
+        */
+        if (temp != null) {
+            llist = temp.prev;
+        }
+        return llist
+    }
+};
 
